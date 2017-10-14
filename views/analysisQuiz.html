@@ -1,0 +1,244 @@
+{{>header}}
+{{>leftmenu2}}
+
+
+<main class=" grey lighten-4">
+    <div class="card-panel transparent z-depth-0 no-margin">
+        <div class="card-panel z-depth-0 grey lighten-5">
+            <div class="row">
+                <div class="col m5 l5">
+                    <h5 class="header-text">Analysis: {{title}}</h5>
+                    <small>Measure how your student are doing in exams</small>
+                </div>
+                <div class="col m7 l7">
+                    <!-- <button type="file" class="btn light-blue waves-effect right"><i class="mdi-file-file-download right"></i>Import Quiz data</button> -->
+                    <form action="#">
+                  <div class="file-field input-field">
+                    <div class="btn">
+                      <span>File</span>
+                      <input type="file" multiple>
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text" placeholder="Upload one or more quizes to analyze">
+                    </div>
+                  </div>
+                </form>
+                </div>
+            </div>
+            
+
+
+
+
+
+
+
+
+
+            <table id="data-table-simple" class="responsive-table display" cellspacing="0">
+                    <thead>
+                        <tr>
+                                <th>Name</th>
+                                <th>Roll No</th>
+                            <th>Question Answered</th>
+                            <th>Question Unanswered</th>
+                            <th>Question Left Blank</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                            {{#each data}}
+                            
+                        <tr>
+                                <td>{{student.name}}</td>
+                                <td>{{student.rollNo}}</td>
+                                <td>{{result.correct}}</td>
+                                <td>{{result.wrong}}</td>
+                                <td>{{result.unanswered}}</td>
+                            <td><a href="http://127.0.0.1:3000/downloadQuiz:{{_id}}" class="btn col s6 green waves-effect lighten-2" >Detail</i></a>
+                            <a href="http://127.0.0.1:3000/deleteQuiz:{{_id}}" class="btn col s6 red waves-effect lighten-2"><i class="mdi-action-delete"></i>Delete</a></td>
+                        </tr>
+                        
+                        {{/each}}
+
+                    </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            <div class="divider"></div>
+            <div class="row">
+
+                <div class="col m12 l12">
+                <!--Bar Chart-->
+                    <div id="chartjs-bar-chart" class="section">
+                    
+                      <div class="sample-chart-wrapper">
+                          <canvas id="bar-chart-sample" height="120"></canvas>
+                      </div>
+                        
+                     </div>
+             
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Secondary content-->
+<!--
+<div class="row">
+        <div class="col s12 m4 l3">
+          <p class="header">Secondary content</p>
+        </div>
+        <div class="col s12 m8 l9">
+
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4>First Names</h4>
+            </li>
+            <li class="collection-item">
+              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
+              </div>
+            </li>
+            <li class="collection-item">
+              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
+              </div>
+            </li>
+            <li class="collection-item">
+              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
+              </div>
+            </li>
+            <li class="collection-item">
+              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+			
+
+
+	<!-- jQuery Library -->
+	<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>    
+	<!--materialize js-->
+	<script type="text/javascript" src="libs/js/materialize.min.js"></script>
+
+	<script type="text/javascript" src="libs/js/materialize-plugin/leanModal.js"></script>
+	
+
+	 <!-- chartjs -->
+     <script type="text/javascript" src="libs/js/plugins/chartjs/chart.min.js"></script>
+
+
+    <!--sweetalert -->
+    <script type="text/javascript" src="libs/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<!-- askualabs script -->
+	<script src="libs/js/script.js"></script>
+	<!-- quiz gen -->
+    <script src="libs/js/quizGenerator.js"></script>
+    <!-- data-tables -->
+    <script type="text/javascript" src="libs/js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="libs/js/plugins/data-tables/data-tables-script.js"></script>
+    <script>
+        // ANALYSIS OF QUIZs FROM DB and an imported files
+
+        var QuizChartSampleData = {
+            labels: [],
+            //labels: ["1", "2", "3", "4", "5", "6", "7","8","9","10","11"],
+            datasets: [
+                {
+                    label: "quiz dataset",
+                    fillColor: "rgba(38,166,154,0.5)",
+                    strokeColor: "rgba(38,166,154,0.8)",
+                    highlightFill: "rgba(38,166,154,0.75)",
+                    highlightStroke: "rgba(38,166,154,1)",
+                    data: [65, 59, 80, 81, 56]
+                }
+            ]
+        };  
+        {{#each answers}}
+             eval(QuizChartSampleData.labels.push("Question "+({{@index}}+1)+";"));
+        {{/each}}
+
+
+        window.onload =  window.onload = function() {
+            window.QuizChartSample = new Chart(document.getElementById("bar-chart-sample").getContext("2d")).Bar(QuizChartSampleData,{
+            responsive:true
+            });
+        }
+    /*
+    {{#each answers}}
+
+{{@index}} :
+{{[0]}}
+
+{{/each}}
+    */
+    
+    
+    </script>
+
+
+</html>

@@ -1,0 +1,94 @@
+{{>header}}
+
+{{>leftmenu2}}
+
+
+<main class=" grey lighten-4">
+		<div class="card-panel transparent z-depth-0 no-margin">
+			<div class="card-panel z-depth-0 grey lighten-5">
+				<div class="row">
+					<div class="col m6 l6">
+						<p class="flow-text no-margin">Quizes/Tests</p>
+					</div>
+					<div class="col m6 l6 modal-fixed-footer">
+						<a class="waves-effect waves-light btn modal-trigger right" href="#modal1"><i class="mdi-content-add right"></i>Add Quiz</a>
+						 <!-- modal -->
+                         <div id="modal1" class="modal modal-fixed-footer">
+                    <form action = "http://127.0.0.1:3000/teacher_quizP" method = "GET">
+	                  <div class="modal-content">
+                        
+	                  		<div class="row">
+	                  			<div class="col m12 l12">
+		                  			<p>Create a quiz using this form</p>
+		                  			<div id="preQuiz">
+			                  			<div class="input-field">
+				                  			<label for="title">Title</label>
+				                  			<input type="text" name="title" id="title">
+				                  		</div>
+				                  		<div class="input-field col s6 m6 no-padding">
+				                  			<label for="timeAllowed">Time allowed(in min)</label>
+				                  			<input type="number" name="timeAllowed" id="timeAllowed">
+				                  		</div>
+				                  		<div class="input-field col s6 m6">
+				                  			<select id="noQu" onchange="test()" name="total">
+				                  				<option value="" disabled selected>Number of Question</option>
+				                  				<option value="5">5</option>
+				                  				<option value="10">10</option>
+				                  				<option value="15">15</option>
+				                  			</select>
+				                  		</div>
+			                  		</div>
+			                  		<div id="quizArea">
+			                  		</div>
+			                  		<div id="answersArea" class="hide">
+				                  		<div class="input-field">
+                                              <label for="answers">Answers separated in coma (e.g A,D,C..)</label>
+				                  			<input type="text"  id="answers" name="answers">
+				                  		</div>
+                                    </div>
+	                  			</div>
+	                  		</div>
+	                  	
+	                  </div>
+	                  <div class="modal-footer">
+	                    <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cancel</a>
+                        <button class="waves-effect waves-green btn-flat modal-action modal-close btn cyan waves-effect waves-light right" type="submit" name="action">Save
+                        </button>
+                      </div>
+                    </form>
+                    </div>
+                
+	                  <!-- end modal -->
+					</div>
+				</div>
+				<div class="divider"></div>
+				<table class="striped ">
+                    <thead>
+                      <tr>
+                        <th data-field="id">Title</th>
+                        <th data-field="name" class="right">Action(Export, Delete)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                            {{#each data}}
+                            <tr>
+                                <td>{{title}}</td>
+                                <td class="right">
+									<a href="http://127.0.0.1:3000/downloadQuiz:{{_id}}" class="btn col s6 green waves-effect lighten-2" >Download</i></a>
+									<a href="http://127.0.0.1:3000/analysisQuiz:{{_id}}" class="btn col s6 green waves-effect lighten-2" >Analysis</a>
+                                    <a href="http://127.0.0.1:3000/deleteQuiz:{{_id}}" class="btn col s6 red waves-effect lighten-2"><i class="mdi-action-delete"></i>Delete</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                      
+                    </tbody>
+                </table>
+                  <div id="mainQ">
+                  </div>
+			</div>
+		</div>
+	</main>
+
+
+
+{{>footer}}
