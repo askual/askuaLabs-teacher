@@ -11,9 +11,8 @@
                     <small>Measure how your student are doing in exams</small>
                 </div>
                 <div class="col m7 l7">
-                    <!-- <button type="file" class="btn light-blue waves-effect right"><i class="mdi-file-file-download right"></i>Import Quiz data</button> -->
                     <form action="#">
-                  <div class="file-field input-field">
+                  <!--div class="file-field input-field">
                     <div class="btn">
                       <span>File</span>
                       <input type="file" multiple>
@@ -21,11 +20,19 @@
                     <div class="file-path-wrapper">
                       <input class="file-path validate" type="text" placeholder="Upload one or more quizes to analyze">
                     </div>
-                  </div>
+                  </div-->
+                  <form ref='uploadForm'
+      						id='uploadForm'
+      						action='http://localhost:3000/analysis_quiz_upload'
+      						method='post'
+      						encType="multipart/form-data">
+      						<input type="file" name="sampleFile" data-height="55" />
+      						<input type='submit' value='Uplo ad!' />
+
                 </form>
                 </div>
             </div>
-            
+
 
 
 
@@ -49,7 +56,7 @@
 
                     <tbody>
                             {{#each data}}
-                            
+
                         <tr>
                                 <td>{{student.name}}</td>
                                 <td>{{student.rollNo}}</td>
@@ -59,7 +66,7 @@
                             <td><a href="http://127.0.0.1:3000/downloadQuiz:{{_id}}" class="btn col s6 green waves-effect lighten-2" >Detail</i></a>
                             <a href="http://127.0.0.1:3000/deleteQuiz:{{_id}}" class="btn col s6 red waves-effect lighten-2"><i class="mdi-action-delete"></i>Delete</a></td>
                         </tr>
-                        
+
                         {{/each}}
 
                     </tbody>
@@ -92,25 +99,25 @@
 
 
 
-            
+
             <div class="divider"></div>
             <div class="row">
 
                 <div class="col m12 l12">
                 <!--Bar Chart-->
                     <div id="chartjs-bar-chart" class="section">
-                    
+
                       <div class="sample-chart-wrapper">
                           <canvas id="bar-chart-sample" height="120"></canvas>
                       </div>
-                        
+
                      </div>
-             
-                    
+
+
                 </div>
-                
+
             </div>
-            
+
         </div>
     </div>
 </main>
@@ -120,73 +127,18 @@
 
 
 
-
-
-
-
-
-
-
-<!--Secondary content-->
-<!--
-<div class="row">
-        <div class="col s12 m4 l3">
-          <p class="header">Secondary content</p>
-        </div>
-        <div class="col s12 m8 l9">
-
-          <ul class="collection with-header">
-            <li class="collection-header">
-              <h4>First Names</h4>
-            </li>
-            <li class="collection-item">
-              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
-              </div>
-            </li>
-            <li class="collection-item">
-              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
-              </div>
-            </li>
-            <li class="collection-item">
-              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
-              </div>
-            </li>
-            <li class="collection-item">
-              <div>Alvin<a href="#!" class="secondary-content"><i class="mdi-content-send"></i></a>
-              </div>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-    -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 
-			
+
 
 
 	<!-- jQuery Library -->
-	<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>    
+	<script type="text/javascript" src="libs/js/plugins/jquery-1.11.2.min.js"></script>
 	<!--materialize js-->
 	<script type="text/javascript" src="libs/js/materialize.min.js"></script>
 
 	<script type="text/javascript" src="libs/js/materialize-plugin/leanModal.js"></script>
-	
+
 
 	 <!-- chartjs -->
      <script type="text/javascript" src="libs/js/plugins/chartjs/chart.min.js"></script>
@@ -217,7 +169,7 @@
                     data: [65, 59, 80, 81, 56]
                 }
             ]
-        };  
+        };
         {{#each answers}}
              eval(QuizChartSampleData.labels.push("Question "+({{@index}}+1)+";"));
         {{/each}}
@@ -236,8 +188,8 @@
 
 {{/each}}
     */
-    
-    
+
+
     </script>
 
 
